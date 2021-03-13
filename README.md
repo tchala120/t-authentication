@@ -1,5 +1,3 @@
-# with-typescript-eslint-lint-staged-prettier-template
+# Toon Core Api
 
-This Repo is contain a template that you can clone and run on it.
-
-**ENJOY**
+This project is for my website api build with graphql
