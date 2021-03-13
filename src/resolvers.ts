@@ -7,11 +7,11 @@ import { Context } from './index'
 
 import { IUser } from './models/user'
 
-import { GraphQLArgument } from './types'
+import { Argument } from './types'
 
 type ResolverOptions = (
   parent: ParentNode,
-  args: GraphQLArgument,
+  args: Argument,
   ctx: Context,
   info: GraphQLResolveInfo
 ) => unknown | Promise<unknown>
@@ -27,6 +27,6 @@ export const resolvers: Resolvers = {
     getUsers: async (): Promise<IUser[]> => await userService.findAll?.(),
   },
   Mutation: {
-    addUser: async (_: ParentNode, args: GraphQLArgument): Promise<IUser> => await userService.addUser(args.input),
+    addUser: async (_: ParentNode, args: Argument): Promise<IUser> => await userService.addUser(args.input),
   },
 }
