@@ -1,7 +1,9 @@
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
-dotenv.config()
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV || 'local'}`,
+})
 
 function setupDatabase(): void {
   const username = process.env.DB_USERNAME
