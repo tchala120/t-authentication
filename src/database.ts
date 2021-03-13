@@ -22,7 +22,7 @@ function setupDatabase(): void {
         throw e.message
       })
   } else {
-    throw Error('No username or password to access database')
+    throw Error('Cannot connect to database cause of have no data access.')
   }
 }
 
