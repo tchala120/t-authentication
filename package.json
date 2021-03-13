@@ -5,15 +5,13 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node-dev --respawn ./src/",
-    "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
     "lint": "eslint . --ext js,ts",
     "lint:fix": "npm run lint -- --fix"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run type-check"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
