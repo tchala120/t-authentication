@@ -6,12 +6,14 @@
   "scripts": {
     "start": "ts-node-dev --respawn ./src/",
     "format": "prettier --write .",
+    "type-check": "tsc --pretty --noEmit",
     "lint": "eslint . --ext js,ts",
     "lint:fix": "npm run lint -- --fix"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run type-check"
     }
   },
   "lint-staged": {
