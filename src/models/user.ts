@@ -1,6 +1,7 @@
 import { ApolloError } from 'apollo-server-errors'
 import * as mongoose from 'mongoose'
-import { NextError, Error } from '../types'
+
+import { NextError, Error } from '@src/types'
 
 interface Token {
   accessToken: string

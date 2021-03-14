@@ -1,14 +1,15 @@
 import { GraphQLResolveInfo } from 'graphql'
 import { IResolvers } from 'graphql-tools'
 
-import authService from './graphql/auth/service'
+import authService from '@graphql/auth/service'
 
-import { Context } from './index'
-import withAuth from './middlewares/withAuth'
+import { Context } from '@src/index'
 
-import { IUser } from './models/user'
+import withAuth from '@middlewares/withAuth'
 
-import { Argument } from './types'
+import { IUser } from '@models/user'
+
+import { Argument } from '@src/types'
 
 type ResolverOptions = (
   parent: ParentNode,
