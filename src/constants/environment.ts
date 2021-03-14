@@ -7,4 +7,5 @@ config({
 
 export const USERNAME = process.env.DB_USERNAME
 export const PASSWORD = process.env.DB_PASSWORD
-export const SECRET_KEY = process.env.SECRET_KEY
+export const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET
+export const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET
