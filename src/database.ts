@@ -9,7 +9,7 @@ function setupDatabase(): void {
   const username = process.env.DB_USERNAME
   const password = process.env.DB_PASSWORD
   if (username && password) {
-    const uri = `mongodb+srv://${username}:${password}@cluster0.eignu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+    const uri = `mongodb+srv://${username}:${password}@cluster0.eignu.mongodb.net/tcore-dev?retryWrites=true&w=majority`
     mongoose.Promise = global.Promise
     mongoose
       .connect(uri, {
