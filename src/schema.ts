@@ -24,7 +24,7 @@ export const schema = gql`
   }
 
   type Query {
-    getUsers: Users
+    getUsers: [User]
   }
 
   type Mutation {
