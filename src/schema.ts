@@ -18,18 +18,16 @@ export const schema = gql`
     updatedAt: Date
   }
 
-  type Query {
-    getUsers: [User]
-  }
-
-  input CreateUserInput {
-    firstName: String
-    lastName: String
+  input LoginInput {
     email: String
     password: String
   }
 
+  type Query {
+    getUsers: Users
+  }
+
   type Mutation {
-    addUser(input: CreateUserInput): User
+    login(input: LoginInput): User
   }
 `
