@@ -1,12 +1,12 @@
 import { ARGUMENT_IS_REQUIRED } from '@constants/errors/args'
+import { EMAIL_NOT_FOUND, EMAIL_OR_PASSWORD_NOT_CORRECT } from '@src/constants/errors/user'
 
 import errorHandler from '@handler/error'
 
 import UserModel, { IUser } from '@models/user'
-import { EMAIL_NOT_FOUND, EMAIL_OR_PASSWORD_NOT_CORRECT } from '@src/constants/errors/user'
+
 import { hashingPassword, isPasswordCorrect } from '@src/utils/crypto'
 import { signToken } from '@src/utils/token'
-
 import { isObjectEmpty } from '@utils/validate'
 
 import { ILoginInput, ITokenSign } from '.'
@@ -32,7 +32,11 @@ async function login(input: ILoginInput): Promise<IUser> {
 
   if (!isPasswordCorrect(input.password, user.password)) throw errorHandler(EMAIL_OR_PASSWORD_NOT_CORRECT)
 
-  const token = signToken(user)
+  const token = signToken<ITokenSign>({
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+  })
 
   user.token = token
 
