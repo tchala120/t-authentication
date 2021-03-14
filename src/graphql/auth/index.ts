@@ -1,4 +1,2 @@
-export interface ILoginInput {
-  email: string
-  password: string
-}
+export * from './interface'
+export * from './service'
