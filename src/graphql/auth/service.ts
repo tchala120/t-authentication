@@ -1,8 +1,27 @@
-import errorHandler from '../../handler/error'
+import { ARGUMENT_IS_REQUIRED } from '@constants/errors/args'
 
-import UserModel, { IUser } from '../../models/user'
+import errorHandler from '@handler/error'
+
+import UserModel, { IUser } from '@models/user'
+import { signToken } from '@src/utils/token'
+
+import { isObjectEmpty } from '@utils/validate'
 
 import { ILoginInput } from '.'
+import { IRegisterInput } from './interface'
+
+async function register(input: IRegisterInput): Promise<IUser> {
+  if (isObjectEmpty(input)) throw errorHandler(ARGUMENT_IS_REQUIRED)
+
+  const { password, ...data } = input
+
+  const token = signToken<IRegisterInput>({ ...data })
+  const newUser = new UserModel({ ...input, token })
+
+  await newUser.save()
+
+  return newUser
+}
 
 async function login(input: ILoginInput): Promise<IUser> {
   console.log('Login input', input)
@@ -15,5 +34,6 @@ async function login(input: ILoginInput): Promise<IUser> {
 }
 
 export default {
+  register,
   login,
 }
