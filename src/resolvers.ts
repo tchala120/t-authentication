@@ -4,6 +4,7 @@ import { IResolvers } from 'graphql-tools'
 import userService from './graphql/user/service'
 
 import { Context } from './index'
+import withAuth from './middlewares/withAuth'
 
 import { IUser } from './models/user'
 
@@ -24,9 +25,9 @@ interface Resolvers extends IResolvers {
 
 export const resolvers: Resolvers = {
   Query: {
-    getUsers: async (): Promise<IUser[]> => await userService.findAll?.(),
+    getUsers: async (...args): Promise<IUser[]> => withAuth<IUser[]>(...args)(await userService.findAll?.()),
   },
   Mutation: {
-    addUser: async (_: ParentNode, args: Argument): Promise<IUser> => await userService.addUser(args.input),
+    addUser: async (...args): Promise<IUser> => withAuth<IUser>(...args)(await userService.addUser(args[1].input)),
   },
 }
