@@ -5,7 +5,8 @@
   "rules": {
     "prettier/prettier": "error",
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }]
+    "@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   },
   "extends": [
     "eslint:recommended",
