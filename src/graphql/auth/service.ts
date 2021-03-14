@@ -3,11 +3,13 @@ import { ARGUMENT_IS_REQUIRED } from '@constants/errors/args'
 import errorHandler from '@handler/error'
 
 import UserModel, { IUser } from '@models/user'
+import { EMAIL_NOT_FOUND, EMAIL_OR_PASSWORD_NOT_CORRECT } from '@src/constants/errors/user'
+import { hashingPassword, isPasswordCorrect } from '@src/utils/crypto'
 import { signToken } from '@src/utils/token'
 
 import { isObjectEmpty } from '@utils/validate'
 
-import { ILoginInput } from '.'
+import { ILoginInput, ITokenSign } from '.'
 import { IRegisterInput } from './interface'
 
 async function register(input: IRegisterInput): Promise<IUser> {
@@ -15,8 +17,8 @@ async function register(input: IRegisterInput): Promise<IUser> {
 
   const { password, ...data } = input
 
-  const token = signToken<IRegisterInput>({ ...data })
-  const newUser = new UserModel({ ...input, token })
+  const token = signToken<ITokenSign>({ ...data })
+  const newUser = new UserModel({ ...input, token, password: hashingPassword(password) })
 
   await newUser.save()
 
@@ -24,11 +26,15 @@ async function register(input: IRegisterInput): Promise<IUser> {
 }
 
 async function login(input: ILoginInput): Promise<IUser> {
-  console.log('Login input', input)
+  const user = await UserModel.findOne({ email: input.email })
 
-  const user = await UserModel.findById('helloworld')
+  if (!user) throw errorHandler(EMAIL_NOT_FOUND)
 
-  if (!user) throw errorHandler({ message: 'not found user', code: 'USER_NOT_FOUND' })
+  if (!isPasswordCorrect(input.password, user.password)) throw errorHandler(EMAIL_OR_PASSWORD_NOT_CORRECT)
+
+  const token = signToken(user)
+
+  user.token = token
 
   return user
 }
