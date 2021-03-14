@@ -14,3 +14,8 @@ export const TOKEN_NOT_BEARER_TYPE: ErrorPayload = {
   message: 'This token is not bearer type, please re-check',
   code: 'TOKEN_NOT_BEARER_TYPE',
 }
+
+export const SIGNING_TOKEN_OCCURED: ErrorPayload = {
+  message: 'Signing token occurred',
+  code: 'SIGNING_TOKEN_OCCURED',
+}
