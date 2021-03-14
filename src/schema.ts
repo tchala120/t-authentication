@@ -19,8 +19,15 @@ export const schema = gql`
   }
 
   input LoginInput {
-    email: String
-    password: String
+    email: String!
+    password: String!
+  }
+
+  input RegisterInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
   }
 
   type Query {
@@ -29,5 +36,6 @@ export const schema = gql`
 
   type Mutation {
     login(input: LoginInput): User
+    register(input: RegisterInput): User
   }
 `
