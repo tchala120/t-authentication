@@ -1,10 +1,14 @@
+import 'module-alias/register'
+
 import { ApolloServer } from 'apollo-server'
-import { Authentication } from './types'
 
-import setupDatabase from './database'
+import setupDatabase from '@src/database'
 
-import { resolvers } from './resolvers'
-import { schema } from './schema'
+import { Authentication } from '@src/types'
+
+import { resolvers } from '@src/resolvers'
+
+import { schema } from '@src/schema'
 
 export interface Context {
   auth: Authentication
