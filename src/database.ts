@@ -1,13 +1,9 @@
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-
-dotenv.config({
-  path: `.env.${process.env.NODE_ENV || 'local'}`,
-})
+import { PASSWORD, USERNAME } from './constants/environment'
 
 function setupDatabase(): void {
-  const username = process.env.DB_USERNAME
-  const password = process.env.DB_PASSWORD
+  const username = USERNAME
+  const password = PASSWORD
   if (username && password) {
     const uri = `mongodb+srv://${username}:${password}@cluster0.eignu.mongodb.net/tcore-dev?retryWrites=true&w=majority`
     mongoose.Promise = global.Promise
