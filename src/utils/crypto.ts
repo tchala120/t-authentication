@@ -1,6 +1,6 @@
-import { compare, hash } from 'bcryptjs'
+import { compare, hash, genSaltSync } from 'bcryptjs'
 
-import { SALT } from '@constants/environment'
+const SALT = genSaltSync(10)
 
 export async function isPasswordCorrect(password: string, hashPassword: string) {
   return (await compare(password, hashPassword)).valueOf
