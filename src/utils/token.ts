@@ -5,7 +5,7 @@ import { SIGNING_TOKEN_OCCURED, TOKEN_NOT_BEARER_TYPE } from '@constants/errors/
 
 import errorHandler from '@handler/error'
 
-import { ILoginInput, IRegisterInput, Token } from '@src/graphql/auth'
+import { Token } from '@src/graphql/auth'
 
 type SignTokenData<T> = T | string
 
@@ -24,7 +24,7 @@ export function checkToken(token: string): any {
   return isTokenVerify
 }
 
-export function signToken<T extends IRegisterInput | ILoginInput>(data: SignTokenData<T>): Token {
+export function signToken<T extends Record<string, any>>(data: SignTokenData<T>): Token {
   try {
     const accessToken = jwt.sign(data, ACCESS_TOKEN_SECRET || '', { expiresIn: '3m' })
     const refreshToken = jwt.sign(data, REFRESH_TOKEN_SECRET || '', { expiresIn: '7d' })
