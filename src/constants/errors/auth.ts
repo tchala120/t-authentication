@@ -19,3 +19,8 @@ export const SIGNING_TOKEN_OCCURED: ErrorPayload = {
   message: 'Signing token occurred',
   code: 'SIGNING_TOKEN_OCCURED',
 }
+
+export const INVALID_SIGNATURE: ErrorPayload = {
+  message: 'Invalid sigature',
+  code: 'INVALID_SIGNATURE',
+}
