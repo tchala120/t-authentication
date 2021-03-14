@@ -10,7 +10,7 @@ async function findAll(): Promise<IUser[]> {
 }
 
 async function addUser(input: ICreateUser): Promise<IUser> {
-  if (isObjectEmpty<ICreateUser>(input)) errorHandler(ARGUMENT_IS_REQUIRED.message, ARGUMENT_IS_REQUIRED.code)
+  if (isObjectEmpty<ICreateUser>(input)) errorHandler(ARGUMENT_IS_REQUIRED)
   const newUser = new UserModel({
     ...input,
   })
