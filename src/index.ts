@@ -1,6 +1,8 @@
 import 'module-alias/register'
+import express from 'express'
+import cors from 'cors'
 
-import { ApolloServer } from 'apollo-server'
+import { ApolloServer } from 'apollo-server-express'
 
 import setupDatabase from '@src/database'
 
@@ -16,7 +18,14 @@ export interface Context {
 
 setupDatabase()
 
-const server: ApolloServer = new ApolloServer({
+const app = express()
+const PORT = process.env.PORT || 4000
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cors())
+
+const server = new ApolloServer({
   typeDefs: schema,
   resolvers: resolvers,
   context: ({ req }): Context => {
@@ -34,7 +43,8 @@ const server: ApolloServer = new ApolloServer({
   },
 })
 
-// The `listen` method launches a web server.
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`)
+server.applyMiddleware({
+  app,
 })
+
+app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`))
