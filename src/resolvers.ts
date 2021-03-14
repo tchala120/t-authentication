@@ -28,5 +28,6 @@ export const resolvers: Resolvers = {
   Query: {},
   Mutation: {
     login: async (...args): Promise<IUser> => withAuth<IUser>(...args)(await authService.login(args[1].input)),
+    register: async (...args): Promise<IUser> => await authService.register(args[1].input),
   },
 }
