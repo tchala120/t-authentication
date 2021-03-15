@@ -1,36 +1,25 @@
 import jwt from 'jsonwebtoken'
 
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from '@constants/environment'
-import { INVALID_SIGNATURE, SIGNING_TOKEN_OCCURED, TOKEN_NOT_BEARER_TYPE } from '@constants/errors/auth'
+import { SIGNING_TOKEN_OCCURED } from '@constants/errors/auth'
 
 import errorHandler from '@handler/error'
 
-import { ITokenSign, Token } from '@src/graphql/auth'
-import { TOKEN_TYPE } from '@src/constants/token'
+import { Token } from '@src/graphql/auth'
 
 type SignTokenData<T> = T | string
 
-export interface TokenResult {
-  payload: any
-  isVerify: boolean
-}
-
-function tokenDecode(token: string): ITokenSign {
-  const decoded = jwt.decode(token) as ITokenSign
-
+export function tokenDecode(token: string): any {
+  const decoded = jwt.decode(token)
   return decoded
 }
 
-export function checkToken(token: string): ITokenSign {
-  const isTokenBearerType = token.startsWith('Bearer')
-  if (!isTokenBearerType) throw errorHandler(TOKEN_NOT_BEARER_TYPE)
+export function tokenVerify(token: string): any {
+  return jwt.verify(token, ACCESS_TOKEN_SECRET || '')
+}
 
-  token = token.substring(TOKEN_TYPE.length).trim()
-
-  const isTokenVerify = jwt.verify(token, ACCESS_TOKEN_SECRET || '')
-
-  if (isTokenVerify) return tokenDecode(token)
-  else throw errorHandler(INVALID_SIGNATURE)
+export function isTokenVerify(token: string): boolean {
+  return !!tokenVerify(token)
 }
 
 export function signToken<T extends Record<string, any>>(data: SignTokenData<T>): Token {
