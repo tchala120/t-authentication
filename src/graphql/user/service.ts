@@ -1,4 +1,4 @@
-import type { Context } from '@src/index'
+import type { IContext } from '@src/index'
 import type { UserJwt } from '@src/types'
 
 import { USER_NOT_FOUND } from '@src/constants/errors/user'
@@ -9,7 +9,7 @@ import errorHandler from '@src/handler/error'
 
 import { tokenVerify } from '@src/utils/token'
 
-async function me(ctx: Context): Promise<IUser> {
+async function me(ctx: IContext): Promise<IUser> {
   const userJWT: UserJwt = tokenVerify(ctx.auth.token)
 
   const user = await UserModel.findOne({ email: userJWT.email })

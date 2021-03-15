@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose'
 
 import { NextError, IError } from '@src/types'
 import { EMAIL_IS_ALREADY_EXIST } from '@src/constants/errors/user'
-import { IToken } from '@src/graphql/auth'
+import type { IToken } from '@src/graphql/auth'
 
 export interface IUser extends mongoose.Document {
   firstName: string

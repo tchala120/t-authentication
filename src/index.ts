@@ -4,7 +4,7 @@ import cors from 'cors'
 import { ApolloServer } from 'apollo-server-express'
 
 import setupDatabase from '@src/database'
-import { IAuthentication } from '@src/types'
+import type { IAuthentication } from '@src/types'
 import { resolvers } from '@src/resolvers'
 import { schema } from '@src/schema'
 

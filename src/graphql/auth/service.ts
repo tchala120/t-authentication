@@ -9,8 +9,8 @@ import { hashingPassword, isPasswordCorrect } from '@src/utils/crypto'
 import { signToken } from '@src/utils/token'
 import { isObjectEmpty } from '@utils/validate'
 
-import { ILoginInput, ITokenSign } from '.'
-import { IRegisterInput } from './interface'
+import type { ILoginInput, ITokenSign } from '.'
+import type { IRegisterInput } from './interface'
 
 async function register(input: IRegisterInput): Promise<IUser> {
   if (isObjectEmpty(input)) throw errorHandler(ARGUMENT_IS_REQUIRED)

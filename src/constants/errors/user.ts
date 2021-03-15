@@ -1,4 +1,4 @@
-import { IErrorPayload } from '.'
+import type { IErrorPayload } from '.'
 
 export const EMAIL_IS_ALREADY_EXIST: IErrorPayload = {
   message: 'This email is already exist. Try another.',

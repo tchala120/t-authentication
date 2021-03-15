@@ -7,9 +7,9 @@ import { TOKEN_TYPE } from '@src/constants/token'
 
 import errorHandler from '@handler/error'
 
-import { IToken } from '@src/graphql/auth'
+import type { IToken } from '@src/graphql/auth'
 
-import { IJwtResult, UserJwt } from '@src/types'
+import type { IJwtResult, UserJwt } from '@src/types'
 
 type SignTokenData<T> = T | string
 

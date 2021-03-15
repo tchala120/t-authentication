@@ -1,14 +1,14 @@
 import { GraphQLResolveInfo } from 'graphql'
-import { IResolvers } from 'graphql-tools'
+import type { IResolvers } from 'graphql-tools'
 
 import authService from '@graphql/auth/service'
 import userService from '@graphql/user/service'
 
-import { IContext } from '@src/index'
+import type { IContext } from '@src/index'
 
-import { IUser } from '@models/user'
+import type { IUser } from '@models/user'
 
-import { IArgument } from '@src/types'
+import type { IArgument } from '@src/types'
 import withAuth from './middlewares/withAuth'
 
 type ResolverOptions = (

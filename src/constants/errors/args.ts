@@ -1,4 +1,4 @@
-import { IErrorPayload } from '.'
+import type { IErrorPayload } from '.'
 
 export const ARGUMENT_IS_REQUIRED: IErrorPayload = {
   message: 'Argument is required but missing.',

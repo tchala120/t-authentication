@@ -1,4 +1,4 @@
-import { IErrorPayload } from '.'
+import type { IErrorPayload } from '.'
 
 export const MUST_AUTHENTICATE: IErrorPayload = {
   message: 'Must Authenticate.',

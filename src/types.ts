@@ -1,6 +1,6 @@
 import type { CallbackError, NativeError } from 'mongoose'
 
-import { IUser } from '@models/user'
+import type { IUser } from '@models/user'
 import { JwtHeader } from 'jsonwebtoken'
 
 interface IPaginationOption {
