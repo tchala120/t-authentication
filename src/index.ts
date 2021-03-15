@@ -1,15 +1,11 @@
 import 'module-alias/register'
 import express from 'express'
 import cors from 'cors'
-
 import { ApolloServer } from 'apollo-server-express'
 
 import setupDatabase from '@src/database'
-
 import { Authentication } from '@src/types'
-
 import { resolvers } from '@src/resolvers'
-
 import { schema } from '@src/schema'
 
 export interface Context {
@@ -30,9 +26,7 @@ const server = new ApolloServer({
   resolvers: resolvers,
   context: ({ req }): Context => {
     const token = req.headers.authorization || ''
-    let isLoggedIn = false
-
-    if (token) isLoggedIn = true
+    const isLoggedIn = false
 
     return {
       auth: {
