@@ -13,13 +13,6 @@ export interface IUser extends mongoose.Document {
   token: Token
 }
 
-export interface ICreateUser {
-  firstName: IUser['firstName']
-  lastName: IUser['lastName']
-  email: IUser['email']
-  password: string
-}
-
 const TokenSchema = {
   accessToken: { type: String },
   refreshToken: { type: String },
