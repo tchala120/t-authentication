@@ -1,26 +1,26 @@
-import { ErrorPayload } from '.'
+import { IErrorPayload } from '.'
 
-export const MUST_AUTHENTICATE: ErrorPayload = {
+export const MUST_AUTHENTICATE: IErrorPayload = {
   message: 'Must Authenticate.',
   code: 'MUST_AUTHENTICATE',
 }
 
-export const TOKEN_EXPIRED: ErrorPayload = {
+export const TOKEN_EXPIRED: IErrorPayload = {
   message: 'This token is already expired.',
   code: 'TOKEN_EXPIRED',
 }
 
-export const TOKEN_NOT_BEARER_TYPE: ErrorPayload = {
+export const TOKEN_NOT_BEARER_TYPE: IErrorPayload = {
   message: 'This token is not bearer type, please re-check',
   code: 'TOKEN_NOT_BEARER_TYPE',
 }
 
-export const SIGNING_TOKEN_OCCURED: ErrorPayload = {
+export const SIGNING_TOKEN_OCCURED: IErrorPayload = {
   message: 'Signing token occurred',
   code: 'SIGNING_TOKEN_OCCURED',
 }
 
-export const INVALID_SIGNATURE: ErrorPayload = {
+export const INVALID_SIGNATURE: IErrorPayload = {
   message: 'Invalid sigature',
   code: 'INVALID_SIGNATURE',
 }

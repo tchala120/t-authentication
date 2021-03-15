@@ -1,8 +1,8 @@
 import { ApolloError } from 'apollo-server-errors'
 
-import { ErrorPayload } from '@constants/errors'
+import { IErrorPayload } from '@constants/errors'
 
-function errorHandler(error: ErrorPayload): void {
+function errorHandler(error: IErrorPayload): void {
   throw new ApolloError(error.message, error.code)
 }
 
