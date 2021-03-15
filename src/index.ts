@@ -26,11 +26,9 @@ const server = new ApolloServer({
   resolvers: resolvers,
   context: ({ req }): Context => {
     const token = req.headers.authorization || ''
-    const isLoggedIn = false
 
     return {
       auth: {
-        isLoggedIn,
         token,
       },
     }
