@@ -18,9 +18,11 @@ async function register(input: IRegisterInput): Promise<IUser> {
   const { password, ...data } = input
 
   const token = signToken<ITokenSign>({ ...data })
-  const newUser = new UserModel({ ...input, token, password: await hashingPassword(password) })
+  const newUser = new UserModel({ ...input, token: null, password: await hashingPassword(password) })
 
   await newUser.save()
+
+  newUser.token = token
 
   return newUser
 }
