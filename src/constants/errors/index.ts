@@ -1,4 +1,4 @@
-export interface ErrorPayload {
+export interface IErrorPayload {
   message: string
   code: string
 }

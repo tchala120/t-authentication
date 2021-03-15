@@ -3,7 +3,7 @@ import type { CallbackError, NativeError } from 'mongoose'
 import { IUser } from '@models/user'
 import { JwtHeader } from 'jsonwebtoken'
 
-interface PaginationOption {
+interface IPaginationOption {
   limit: number
   totalPages: number
   page: number
@@ -18,20 +18,20 @@ export type UserJwt = IUser & JwtExpiration
 
 export type NextError = (err?: CallbackError) => void
 
-export interface Error extends NativeError {
+export interface IError extends NativeError {
   code?: number
 }
 
-export interface Argument {
+export interface IArgument {
   input?: any
-  pagination?: PaginationOption
+  pagination?: IPaginationOption
 }
 
-export interface Authentication {
+export interface IAuthentication {
   token: string
 }
 
-export interface JwtResult {
+export interface IJwtResult {
   header: JwtHeader
   payload: UserJwt
   signature: string

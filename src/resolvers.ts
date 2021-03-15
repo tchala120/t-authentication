@@ -4,27 +4,27 @@ import { IResolvers } from 'graphql-tools'
 import authService from '@graphql/auth/service'
 import userService from '@graphql/user/service'
 
-import { Context } from '@src/index'
+import { IContext } from '@src/index'
 
 import { IUser } from '@models/user'
 
-import { Argument } from '@src/types'
+import { IArgument } from '@src/types'
 import withAuth from './middlewares/withAuth'
 
 type ResolverOptions = (
   parent: ParentNode,
-  args: Argument,
-  ctx: Context,
+  args: IArgument,
+  ctx: IContext,
   info: GraphQLResolveInfo
 ) => unknown | Promise<unknown>
 
-interface Resolvers extends IResolvers {
+interface IGraphqlResolvers extends IResolvers {
   [key: string]: {
     [key: string]: ResolverOptions
   }
 }
 
-export const resolvers: Resolvers = {
+export const resolvers: IGraphqlResolvers = {
   Query: {
     me: async (...args): Promise<IUser> => withAuth<IUser>(...args)(await userService.me(args[2])),
   },

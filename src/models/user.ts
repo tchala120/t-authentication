@@ -1,16 +1,16 @@
 import { ApolloError } from 'apollo-server-errors'
 import * as mongoose from 'mongoose'
 
-import { NextError, Error } from '@src/types'
+import { NextError, IError } from '@src/types'
 import { EMAIL_IS_ALREADY_EXIST } from '@src/constants/errors/user'
-import { Token } from '@src/graphql/auth'
+import { IToken } from '@src/graphql/auth'
 
 export interface IUser extends mongoose.Document {
   firstName: string
   lastName: string
   email: string
   password: string
-  token: Token
+  token: IToken
 }
 
 const TokenSchema = {
@@ -35,7 +35,7 @@ UserSchema.pre('save', (next: NextError) => {
   next()
 })
 
-UserSchema.post('save', (error: Error, _: unknown, next: NextError) => {
+UserSchema.post('save', (error: IError, _: unknown, next: NextError) => {
   if (error.code === 11000) {
     next(new ApolloError(EMAIL_IS_ALREADY_EXIST.message, EMAIL_IS_ALREADY_EXIST.code))
   } else {
