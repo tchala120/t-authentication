@@ -14,3 +14,8 @@ export const EMAIL_OR_PASSWORD_NOT_CORRECT: ErrorPayload = {
   message: 'Email or password not correct.',
   code: 'EMAIL_OR_PASSWORD_NOT_CORRECT',
 }
+
+export const USER_NOT_FOUND: ErrorPayload = {
+  message: 'User is not found',
+  code: 'USER_NOT_FOUND',
+}
