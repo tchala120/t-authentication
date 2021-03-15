@@ -8,7 +8,7 @@ import { Authentication } from '@src/types'
 import { resolvers } from '@src/resolvers'
 import { schema } from '@src/schema'
 
-export interface Context {
+export interface IContext {
   auth: Authentication
 }
 
@@ -24,7 +24,7 @@ app.use(cors())
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers: resolvers,
-  context: ({ req }): Context => {
+  context: ({ req }): IContext => {
     const token = req.headers.authorization || ''
 
     return {
