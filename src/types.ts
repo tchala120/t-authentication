@@ -1,7 +1,5 @@
 import type { CallbackError, NativeError } from 'mongoose'
-
-import type { IUser } from '@models/user'
-import { JwtHeader } from 'jsonwebtoken'
+import type { JwtHeader } from 'jsonwebtoken'
 
 interface IPaginationOption {
   limit: number
@@ -9,12 +7,16 @@ interface IPaginationOption {
   page: number
 }
 
-type JwtExpiration = {
+interface IJwtExpiration {
   iat: number
   exp: number
 }
 
-export type UserJwt = IUser & JwtExpiration
+interface IJwtPayload {
+  email: string
+}
+
+export type UserJwt = IJwtPayload & IJwtExpiration
 
 export type NextFunction = (err?: CallbackError) => void
 
