@@ -8,6 +8,7 @@ import authService from '@graphql/auth/service'
 import userService from '@graphql/user/service'
 
 import withAuth from '@middlewares/withAuth'
+import withTransaction from './middlewares/withTransaction'
 
 type ResolverOptions = (
   parent: ParentNode,
@@ -31,6 +32,9 @@ export const resolvers: IGraphqlResolvers = {
   },
   Mutation: {
     login: async (_parent: ParentNode, args: IArgument): Promise<IUser> => await authService.login(args.input),
-    register: async (_parent: ParentNode, args: IArgument): Promise<IUser> => await authService.register(args.input),
+    register: async (...args): Promise<IUser> =>
+      withTransaction<IUser>(...args)(
+        async (_parent: ParentNode, args: IArgument) => await authService.register(args.input)
+      ),
   },
 }
