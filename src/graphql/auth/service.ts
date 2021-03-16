@@ -16,10 +16,8 @@ import { isObjectEmpty } from '@utils/validate'
 async function register(input: IRegisterInput, session: ClientSession): Promise<IUser> {
   if (isObjectEmpty(input)) throw errorHandler(ARGUMENT_IS_REQUIRED)
 
-  const { password, ...data } = input
-
-  const token = signToken<ITokenSign>({ ...data })
-  const newUser = new UserModel({ ...input, token: null, password: await hashingPassword(password) })
+  const token = signToken<ITokenSign>({ email: input.email })
+  const newUser = new UserModel({ ...input, token: null, password: await hashingPassword(input.password) })
 
   await newUser.save()
 
@@ -39,8 +37,6 @@ async function login(input: ILoginInput): Promise<IUser> {
 
   const token = signToken<ITokenSign>({
     email: user.email,
-    firstName: user.firstName,
-    lastName: user.lastName,
   })
 
   user.token = token
