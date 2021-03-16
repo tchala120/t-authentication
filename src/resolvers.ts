@@ -1,14 +1,12 @@
-import { GraphQLResolveInfo } from 'graphql'
+import type { GraphQLResolveInfo } from 'graphql'
 import type { IResolvers } from 'graphql-tools'
+import type { IContext } from '@src/index'
+import type { IUser } from '@models/user'
+import type { IArgument } from '@src/types'
 
 import authService from '@graphql/auth/service'
 import userService from '@graphql/user/service'
 
-import type { IContext } from '@src/index'
-
-import type { IUser } from '@models/user'
-
-import type { IArgument } from '@src/types'
 import withAuth from './middlewares/withAuth'
 
 type ResolverOptions = (
@@ -26,10 +24,13 @@ interface IGraphqlResolvers extends IResolvers {
 
 export const resolvers: IGraphqlResolvers = {
   Query: {
-    me: async (...args): Promise<IUser> => withAuth<IUser>(...args)(await userService.me(args[2])),
+    me: async (...args): Promise<IUser> =>
+      withAuth<IUser>(...args)(
+        async (_parent: ParentNode, _args: IArgument, ctx: IContext) => await userService.me(ctx)
+      ),
   },
   Mutation: {
-    login: async (...args): Promise<IUser> => await authService.login(args[1].input),
-    register: async (...args): Promise<IUser> => await authService.register(args[1].input),
+    login: async (_parent: ParentNode, args: IArgument): Promise<IUser> => await authService.login(args.input),
+    register: async (_parent: ParentNode, args: IArgument): Promise<IUser> => await authService.register(args.input),
   },
 }
