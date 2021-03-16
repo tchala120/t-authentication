@@ -10,11 +10,11 @@ type TransactionResult<T> = (wrapper: WrapperResultSync<T>) => Promise<T>
 function withTransaction<T>(...args: any[]): TransactionResult<T> {
   let writeResults: Promise<T>
 
-  const onTransaction = (session: ClientSession, fn: WrapperResultSync<T>) =>
-    fn(...args, session)
-      .then(async (results: any) => {
-        await session.commitTransaction()
+  const onTransaction = (session: ClientSession, fn: WrapperResultSync<T>): Promise<void> => {
+    session.startTransaction()
 
+    return fn(...args, session)
+      .then(async (results: any) => {
         writeResults = results
       })
       .catch(async (error: IError) => {
@@ -30,13 +30,12 @@ function withTransaction<T>(...args: any[]): TransactionResult<T> {
       .finally(() => {
         session.endSession()
       })
+  }
 
   return async (wrapper: WrapperResultSync<T>) => {
     const useTransaction = await mongoose.startSession()
 
     await useTransaction.withTransaction((session: ClientSession) => onTransaction(session, wrapper))
-
-    console.log('result', writeResults)
 
     return writeResults
   }
