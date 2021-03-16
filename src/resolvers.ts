@@ -1,3 +1,4 @@
+import type { ClientSession } from 'mongoose'
 import type { GraphQLResolveInfo } from 'graphql'
 import type { IResolvers } from 'graphql-tools'
 import type { IContext } from '@src/index'
@@ -34,7 +35,13 @@ export const resolvers: IGraphqlResolvers = {
     login: async (_parent: ParentNode, args: IArgument): Promise<IUser> => await authService.login(args.input),
     register: async (...args): Promise<IUser> =>
       withTransaction<IUser>(...args)(
-        async (_parent: ParentNode, args: IArgument) => await authService.register(args.input)
+        async (
+          _parent: ParentNode,
+          args: IArgument,
+          _ctx: IContext,
+          _info: GraphQLResolveInfo,
+          session: ClientSession
+        ) => await authService.register(args.input, session)
       ),
   },
 }
