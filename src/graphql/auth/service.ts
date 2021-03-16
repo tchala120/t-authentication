@@ -1,3 +1,7 @@
+import type { ClientSession } from 'mongoose'
+import type { ILoginInput, ITokenSign } from '.'
+import type { IRegisterInput } from './interface'
+
 import { ARGUMENT_IS_REQUIRED } from '@constants/errors/args'
 import { EMAIL_NOT_FOUND, EMAIL_OR_PASSWORD_NOT_CORRECT } from '@src/constants/errors/user'
 
@@ -9,10 +13,7 @@ import { hashingPassword, isPasswordCorrect } from '@src/utils/crypto'
 import { signToken } from '@src/utils/token'
 import { isObjectEmpty } from '@utils/validate'
 
-import type { ILoginInput, ITokenSign } from '.'
-import type { IRegisterInput } from './interface'
-
-async function register(input: IRegisterInput): Promise<IUser> {
+async function register(input: IRegisterInput, session: ClientSession): Promise<IUser> {
   if (isObjectEmpty(input)) throw errorHandler(ARGUMENT_IS_REQUIRED)
 
   const { password, ...data } = input
@@ -23,6 +24,8 @@ async function register(input: IRegisterInput): Promise<IUser> {
   await newUser.save()
 
   newUser.token = token
+
+  await session.commitTransaction()
 
   return newUser
 }
