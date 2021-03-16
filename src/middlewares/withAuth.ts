@@ -2,7 +2,7 @@ import { AuthenticationError } from 'apollo-server-errors'
 
 import { isTokenExpired, isTokenVerify } from '@utils/token'
 
-type AuthenticationResult<T> = (wrapper: T) => T
+type AuthenticationResult<T> = (...args: any[]) => T
 
 function withAuth<T>(...args: any[]): AuthenticationResult<T> {
   const ctx = args[2]
@@ -15,9 +15,7 @@ function withAuth<T>(...args: any[]): AuthenticationResult<T> {
 
   if (!isTokenVerify(token)) throw new AuthenticationError('Token is not verified')
 
-  return (wrapper: T): T => {
-    return wrapper
-  }
+  return (wrapper: AuthenticationResult<T>): T => wrapper(...args)
 }
 
 export default withAuth
