@@ -16,7 +16,7 @@ type JwtExpiration = {
 
 export type UserJwt = IUser & JwtExpiration
 
-export type NextError = (err?: CallbackError) => void
+export type NextFunction = (err?: CallbackError) => void
 
 export interface IError extends NativeError {
   code?: number
