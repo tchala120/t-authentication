@@ -1,10 +1,10 @@
+import type { WrapperResult } from './type'
+
 import { AuthenticationError } from 'apollo-server-errors'
 
 import { isTokenExpired, isTokenVerify } from '@utils/token'
 
-type AuthenticationResult<T> = (...args: any[]) => T
-
-function withAuth<T>(...args: any[]): AuthenticationResult<T> {
+function withAuth<T>(...args: any[]): WrapperResult<T> {
   const ctx = args[2]
 
   const { token } = ctx.auth
@@ -15,7 +15,7 @@ function withAuth<T>(...args: any[]): AuthenticationResult<T> {
 
   if (!isTokenVerify(token)) throw new AuthenticationError('Token is not verified')
 
-  return (wrapper: AuthenticationResult<T>): T => wrapper(...args)
+  return (wrapper: WrapperResult<T>): T => wrapper(...args)
 }
 
 export default withAuth
