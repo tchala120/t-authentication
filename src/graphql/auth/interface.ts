@@ -16,7 +16,5 @@ export interface IRegisterInput {
 }
 
 export interface ITokenSign {
-  firstName: IRegisterInput['firstName']
-  lastName: IRegisterInput['lastName']
   email: IRegisterInput['email']
 }
