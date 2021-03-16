@@ -1,9 +1,7 @@
-import type { IContext } from '@src/index'
 import type { UserJwt } from '@src/types'
+import type { IContext } from '@src/index'
 
 import { USER_NOT_FOUND } from '@src/constants/errors/user'
-
-import { session } from '@src/database'
 
 import UserModel, { IUser } from '@models/user'
 
@@ -15,17 +13,12 @@ async function me(ctx: IContext): Promise<IUser> {
   const userJWT: UserJwt = tokenVerify(ctx.auth.token)
 
   try {
-    const user = await UserModel.findOne({ email: userJWT.email }).session(session)
+    const user = await UserModel.findOne({ email: userJWT.email })
 
     if (!user) throw errorHandler(USER_NOT_FOUND)
 
-    await session.commitTransaction()
-    session.endSession()
-
     return user
   } catch (e) {
-    await session.abortTransaction()
-    session.endSession()
     throw errorHandler(e)
   }
 }
