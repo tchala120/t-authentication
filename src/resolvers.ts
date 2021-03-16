@@ -7,7 +7,7 @@ import type { IArgument } from '@src/types'
 import authService from '@graphql/auth/service'
 import userService from '@graphql/user/service'
 
-import withAuth from './middlewares/withAuth'
+import withAuth from '@middlewares/withAuth'
 
 type ResolverOptions = (
   parent: ParentNode,
