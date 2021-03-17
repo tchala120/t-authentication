@@ -16,10 +16,11 @@ import { isObjectEmpty } from '@utils/validate'
 async function register(input: IRegisterInput, session: ClientSession): Promise<IUser> {
   if (isObjectEmpty(input)) throw errorHandler(ARGUMENT_IS_REQUIRED)
 
-  const token = signToken<ITokenSign>({ email: input.email })
   const newUser = new UserModel({ ...input, token: null, password: await hashingPassword(input.password) })
 
   await newUser.save()
+
+  const token = signToken<ITokenSign>({ id: newUser._id })
 
   newUser.token = token
 
@@ -36,7 +37,7 @@ async function login(input: ILoginInput): Promise<IUser> {
   if (!isPasswordCorrect(input.password, user.password)) throw errorHandler(EMAIL_OR_PASSWORD_NOT_CORRECT)
 
   const token = signToken<ITokenSign>({
-    email: user.email,
+    id: user._id,
   })
 
   user.token = token
