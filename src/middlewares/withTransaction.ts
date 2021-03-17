@@ -22,7 +22,6 @@ function withTransaction<T>(...args: any[]): TransactionResult<T> {
       if (error.code === 11000) {
         throw errorHandler(EMAIL_IS_ALREADY_EXIST)
       } else {
-        console.log('Error code', error.code)
         throw errorHandler(error)
       }
     }
