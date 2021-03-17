@@ -13,7 +13,7 @@ interface IJwtExpiration {
 }
 
 interface IJwtPayload {
-  email: string
+  id: string
 }
 
 export type UserJwt = IJwtPayload & IJwtExpiration

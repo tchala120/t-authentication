@@ -13,7 +13,7 @@ async function me(ctx: IContext): Promise<IUser> {
   const userJWT: UserJwt = tokenVerify(ctx.auth.token)
 
   try {
-    const user = await UserModel.findOne({ email: userJWT.email })
+    const user = await UserModel.findById(userJWT.id)
 
     if (!user) throw errorHandler(USER_NOT_FOUND)
 

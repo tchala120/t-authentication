@@ -16,5 +16,5 @@ export interface IRegisterInput {
 }
 
 export interface ITokenSign {
-  email: IRegisterInput['email']
+  id: string
 }

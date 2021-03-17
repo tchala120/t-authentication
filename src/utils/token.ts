@@ -38,7 +38,7 @@ export function isTokenVerify(token: string): boolean {
 }
 
 export function isTokenBearerType(token: string): boolean {
-  return token.startsWith('Bearer')
+  return token.split(' ')[0] === 'Bearer'
 }
 
 export function signToken<T extends Record<string, any>>(data: SignTokenData<T>): IToken {
