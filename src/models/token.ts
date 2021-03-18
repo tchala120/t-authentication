@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose'
 import type { NextFunction } from '@src/types'
 
 export interface ITokenSchema extends mongoose.Document {
-  id: string
+  userId: string
   refreshToken: string
   expiresIn: number
 }
