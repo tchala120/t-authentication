@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose'
 import type { NextFunction } from '@src/types'
 import type { IToken } from '@src/graphql/auth'
 
-export interface IUser extends mongoose.Document {
+interface IUserSchema extends mongoose.Document {
   firstName: string
   lastName: string
   email: string
@@ -33,4 +33,4 @@ UserSchema.pre('save', (next: NextFunction) => {
   next()
 })
 
-export default mongoose.model<IUser>('users', UserSchema)
+export default mongoose.model<IUserSchema>('users', UserSchema)
