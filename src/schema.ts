@@ -30,6 +30,10 @@ export const schema = gql`
     password: String!
   }
 
+  input RefreshTokenInput {
+    refreshToken: String
+  }
+
   type Query {
     me: User
   }
@@ -37,5 +41,6 @@ export const schema = gql`
   type Mutation {
     login(input: LoginInput): User
     register(input: RegisterInput): User
+    requestAccessToken(input: RefreshTokenInput): Token
   }
 `
