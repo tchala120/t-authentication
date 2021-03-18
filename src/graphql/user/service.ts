@@ -1,9 +1,9 @@
 import type { UserJwt } from '@src/types'
 import type { IContext } from '@src/index'
 
-import { USER_NOT_FOUND } from '@src/constants/errors/user'
-
 import UserModel, { IUser } from '@models/user'
+
+import { USER_NOT_FOUND } from '@src/constants/errors/user'
 
 import errorHandler from '@src/handler/error'
 
