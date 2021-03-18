@@ -1,13 +1,14 @@
 import type { ClientSession } from 'mongoose'
 import type { ILoginInput, ITokenSign } from '.'
 import type { IRegisterInput } from './interface'
+import type { IUser } from '@graphql/user/interface'
 
 import { ARGUMENT_IS_REQUIRED } from '@constants/errors/args'
 import { EMAIL_NOT_FOUND, EMAIL_OR_PASSWORD_NOT_CORRECT } from '@src/constants/errors/user'
 
 import errorHandler from '@handler/error'
 
-import UserModel, { IUser } from '@models/user'
+import UserModel from '@models/user'
 
 import { hashingPassword, isPasswordCorrect } from '@src/utils/crypto'
 import { signToken } from '@src/utils/token'
