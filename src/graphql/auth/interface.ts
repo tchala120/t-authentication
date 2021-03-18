@@ -18,3 +18,7 @@ export interface IRegisterInput {
 export interface ITokenSign {
   id: string
 }
+
+export interface IRefreshTokenInput {
+  refreshToken: string
+}
