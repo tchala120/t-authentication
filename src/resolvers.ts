@@ -2,7 +2,7 @@ import type { ClientSession } from 'mongoose'
 import type { GraphQLResolveInfo } from 'graphql'
 import type { IResolvers } from 'graphql-tools'
 import type { IContext } from '@src/index'
-import type { IUser } from '@models/user'
+import type { IUser } from '@graphql/user/interface'
 import type { IArgument } from '@src/types'
 
 import authService from '@graphql/auth/service'

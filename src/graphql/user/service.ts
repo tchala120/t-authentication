@@ -1,7 +1,8 @@
 import type { UserJwt } from '@src/types'
 import type { IContext } from '@src/index'
+import type { IUser } from '@graphql/user/interface'
 
-import UserModel, { IUser } from '@models/user'
+import UserModel from '@models/user'
 
 import { USER_NOT_FOUND } from '@src/constants/errors/user'
 
