@@ -1,9 +1,10 @@
 import type { ClientSession } from 'mongoose'
 import type { GraphQLResolveInfo } from 'graphql'
 import type { IResolvers } from 'graphql-tools'
+import type { IToken } from '@graphql/auth'
+import type { IUserSchema } from '@models/user'
 import type { IContext } from '@src/index'
 import type { IArgument } from '@src/types'
-import type { IUserSchema } from '@models/user'
 
 import authService from '@graphql/auth/service'
 import userService from '@graphql/user/service'
@@ -32,7 +33,16 @@ export const resolvers: IGraphqlResolvers = {
       ),
   },
   Mutation: {
-    login: async (_parent: ParentNode, args: IArgument): Promise<IUserSchema> => await authService.login(args.input),
+    login: async (...args): Promise<IUserSchema> =>
+      withTransaction<IUserSchema>(...args)(
+        async (
+          _parent: ParentNode,
+          args: IArgument,
+          _ctx: IContext,
+          _info: GraphQLResolveInfo,
+          session: ClientSession
+        ) => await authService.login(args.input, session)
+      ),
     register: async (...args): Promise<IUserSchema> =>
       withTransaction<IUserSchema>(...args)(
         async (
@@ -42,6 +52,10 @@ export const resolvers: IGraphqlResolvers = {
           _info: GraphQLResolveInfo,
           session: ClientSession
         ) => await authService.register(args.input, session)
+      ),
+    requestAccessToken: async (...args): Promise<IToken> =>
+      withTransaction<IToken>(...args)(
+        async (_parent: ParentNode, args: IArgument) => await authService.requestAccessToken(args.input)
       ),
   },
 }
