@@ -4,6 +4,7 @@ import type { WrapperResult } from './type'
 import { AuthenticationError } from 'apollo-server-errors'
 
 import { isTokenBearerType, isTokenExpired, isTokenVerify } from '@utils/token'
+import { ACCESS_TOKEN } from '@src/constants/token'
 
 function withAuth<T>(...args: any[]): WrapperResult<T> {
   const ctx: IContext = args[2]
@@ -16,7 +17,7 @@ function withAuth<T>(...args: any[]): WrapperResult<T> {
 
   if (isTokenExpired(token)) throw new AuthenticationError('Token is expired')
 
-  if (!isTokenVerify(token)) throw new AuthenticationError('Token is not verified')
+  if (!isTokenVerify(token, ACCESS_TOKEN)) throw new AuthenticationError('Token is not verified')
 
   return (wrapper: WrapperResult<T>): T => wrapper(...args)
 }

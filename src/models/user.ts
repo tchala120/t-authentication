@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose'
 import type { NextFunction } from '@src/types'
 import type { IToken } from '@src/graphql/auth'
 
-interface IUserSchema extends mongoose.Document {
+export interface IUserSchema extends mongoose.Document {
   firstName: string
   lastName: string
   email: string

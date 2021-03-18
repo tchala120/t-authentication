@@ -5,13 +5,14 @@ import type { IUser } from '@graphql/user/interface'
 import UserModel from '@models/user'
 
 import { USER_NOT_FOUND } from '@src/constants/errors/user'
+import { ACCESS_TOKEN } from '@src/constants/token'
 
 import errorHandler from '@src/handler/error'
 
 import { tokenVerify } from '@src/utils/token'
 
 async function me(ctx: IContext): Promise<IUser> {
-  const userJWT: UserJwt = tokenVerify(ctx.auth.token)
+  const userJWT: UserJwt = tokenVerify(ctx.auth.token, ACCESS_TOKEN)
 
   try {
     const user = await UserModel.findById(userJWT.id)
