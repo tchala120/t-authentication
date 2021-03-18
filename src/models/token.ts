@@ -10,7 +10,7 @@ export interface ITokenSchema extends mongoose.Document {
 
 const TokenSchema: mongoose.Schema = new mongoose.Schema(
   {
-    userId: { type: mongoose.SchemaTypes.ObjectId, ref: 'users' },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
     refreshToken: { type: String },
     expiresIn: { type: Number },
   },
@@ -23,4 +23,4 @@ TokenSchema.pre('save', (next: NextFunction) => {
   next()
 })
 
-export default mongoose.model<ITokenSchema>('users', TokenSchema)
+export default mongoose.model<ITokenSchema>('tokens', TokenSchema)
