@@ -24,3 +24,13 @@ export const INVALID_SIGNATURE: IErrorPayload = {
   message: 'Invalid sigature',
   code: 'INVALID_SIGNATURE',
 }
+
+export const TOKEN_NOT_FOUND: IErrorPayload = {
+  message: 'Token not found.',
+  code: 'TOKEN_NOT_FOUND',
+}
+
+export const REFRESH_TOKEN_EXPIRED: IErrorPayload = {
+  message: 'Refresh token has expired. Please re-login again.',
+  code: 'REFRESH_TOKEN_EXPIRED',
+}
