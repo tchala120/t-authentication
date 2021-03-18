@@ -1,3 +1,4 @@
+import type { IContext } from '..'
 import type { WrapperResult } from './type'
 
 import { AuthenticationError } from 'apollo-server-errors'
@@ -5,7 +6,7 @@ import { AuthenticationError } from 'apollo-server-errors'
 import { isTokenBearerType, isTokenExpired, isTokenVerify } from '@utils/token'
 
 function withAuth<T>(...args: any[]): WrapperResult<T> {
-  const ctx = args[2]
+  const ctx: IContext = args[2]
 
   const { token } = ctx.auth
 
