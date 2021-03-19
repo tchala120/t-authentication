@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import type { IToken } from '@src/graphql/auth'
 import type { IJwtResult, UserJwt } from '@src/types'
 
-import { INVALID_SIGNATURE, SIGNING_TOKEN_OCCURED, TOKEN_NOT_BEARER_TYPE } from '@constants/errors/auth'
+import { INVALID_SIGNATURE, SIGNING_TOKEN_OCCURED, TOKEN_NOT_BEARER_TYPE } from '@src/constants/errors'
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from '@constants/environment'
 import { ACCESS_TOKEN, REFRESH_TOKEN, TOKEN_TYPE } from '@constants/token'
 

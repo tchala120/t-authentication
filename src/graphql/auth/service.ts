@@ -3,9 +3,13 @@ import type { ILoginInput, ITokenSign } from '.'
 import type { IRefreshTokenInput, IRegisterInput, IToken } from './interface'
 import type { IUserSchema } from '@models/user'
 
-import { TOKEN_NOT_FOUND, REFRESH_TOKEN_EXPIRED } from '@src/constants/errors/auth'
-import { ARGUMENT_IS_REQUIRED } from '@constants/errors/args'
-import { EMAIL_NOT_FOUND, EMAIL_OR_PASSWORD_NOT_CORRECT } from '@src/constants/errors/user'
+import {
+  EMAIL_NOT_FOUND,
+  EMAIL_OR_PASSWORD_NOT_CORRECT,
+  ARGUMENT_IS_REQUIRED,
+  TOKEN_NOT_FOUND,
+  REFRESH_TOKEN_EXPIRED,
+} from '@src/constants/errors'
 
 import errorHandler from '@handler/error'
 
