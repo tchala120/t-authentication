@@ -1,6 +1,8 @@
-import { EMAIL_IS_ALREADY_EXIST } from '@src/constants/errors/user'
-import errorHandler from '@src/handler/error'
 import mongoose, { ClientSession } from 'mongoose'
+
+import { EMAIL_IS_ALREADY_EXIST } from '@src/constants/errors'
+
+import errorHandler from '@src/handler/error'
 
 import type { WrapperResultSync } from './type'
 
