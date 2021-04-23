@@ -1,5 +1,5 @@
 {
-  "name": "t-core",
+  "name": "t-authentication",
   "version": "1.0.0",
   "main": "index.ts",
   "author": "Panupong Tipjoi",
